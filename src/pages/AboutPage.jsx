@@ -10,9 +10,9 @@ import FeatureCard from '@/components/FeatureCard.jsx';
 import { Button } from '@/components/ui/button';
 
 function AboutPage() {
+  // Founder-specific stats only, the portfolio numbers (projects, AGVs, devices) live on the Home trust bar
   const stats = [
-    { value: '14+', label: 'Years' },
-    { value: '25+', label: 'Projects' },
+    { value: '14+', label: 'Years Embedded' },
     { value: '30+', label: 'Engineers Led' },
     { value: 'ISRO', label: 'Experience' }
   ];
@@ -86,22 +86,20 @@ function AboutPage() {
 
         {/* Founder Section */}
         <section className="py-20">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="flex flex-col items-center text-center"
+                className="md:col-span-2"
               >
-                <div className="w-32 h-32 rounded bg-[#1C2030] flex items-center justify-center heading-font text-4xl text-white mb-4">
-                  MP
-                </div>
-                <h2 className="heading-font text-2xl font-bold text-foreground">Milan Panchal</h2>
-                <p className="mono-font text-xs uppercase tracking-[0.1em] text-primary mt-2 leading-relaxed">
-                  Embedded Systems Architect<br />Project Leader<br />Technology Strategist
-                </p>
+                <img
+                  src="/portfolio.jpeg"
+                  alt="Milan Panchal, founder of Monolith Microsystems"
+                  className="w-full rounded border border-border object-cover"
+                />
               </motion.div>
 
               <motion.div
@@ -109,8 +107,12 @@ function AboutPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="md:col-span-2"
+                className="md:col-span-3"
               >
+                <h2 className="heading-font text-3xl font-bold text-foreground mb-2">Milan Panchal</h2>
+                <p className="mono-font text-xs uppercase tracking-[0.1em] text-primary mb-6">
+                  Embedded Systems Architect · Project Leader · Technology Strategist
+                </p>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-4">
                   14+ years of embedded engineering, from network infrastructure to ISRO satellite communication to leading 30+ engineers on complex IIoT deployments.
                 </p>
@@ -118,7 +120,7 @@ function AboutPage() {
                   Monolith Microsystems is the culmination of that journey, a focused practice that turns ambitious hardware concepts into shipped products. Founders talk to founders, and every project ships.
                 </p>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <div className="grid grid-cols-3 gap-6">
                   {stats.map((stat, index) => (
                     <div key={index}>
                       <div className="heading-font text-3xl font-bold text-primary mb-1">{stat.value}</div>
