@@ -7,14 +7,51 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 
+// Get a free access key at https://web3forms.com (tied to milan@monolithms.com, safe to expose in client code).
+// Either paste it below, or set VITE_WEB3FORMS_ACCESS_KEY in a .env file at the project root.
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE';
+
+const PROJECT_TYPES = [
+  { value: 'industrial-automation', label: 'Industrial Automation' },
+  { value: 'autonomous-systems', label: 'Autonomous Systems' },
+  { value: 'satellite-connectivity', label: 'Satellite & Remote Connectivity' },
+  { value: 'smart-infrastructure', label: 'Smart Infrastructure' },
+  { value: 'medical-automation', label: 'Medical Automation' },
+  { value: 'electric-mobility', label: 'Electric Mobility' },
+  { value: 'edge-ai-iot', label: 'Edge AI / IoT' },
+  { value: 'other', label: 'Other' }
+];
+
+const BUDGET_RANGES = [
+  { value: 'under-10k', label: 'Under $10k' },
+  { value: '10k-50k', label: '$10k to $50k' },
+  { value: '50k-150k', label: '$50k to $150k' },
+  { value: '150k-plus', label: '$150k and above' },
+  { value: 'not-sure', label: 'Not sure yet' }
+];
+
+const TIMELINES = [
+  { value: 'immediate', label: 'Immediate' },
+  { value: '1-3-months', label: '1 to 3 months' },
+  { value: '3-6-months', label: '3 to 6 months' },
+  { value: '6-months-plus', label: '6 months and beyond' },
+  { value: 'exploring', label: 'Just exploring' }
+];
+
+const labelFor = (options, value) => options.find((option) => option.value === value)?.label || 'Not specified';
+
 function ContactForm() {
-  const [formData, setFormData] = useState({
+  const emptyForm = {
     name: '',
     email: '',
     company: '',
-    projectDescription: '',
-    serviceInterest: ''
-  });
+    projectType: '',
+    budgetRange: '',
+    timeline: '',
+    message: ''
+  };
+
+  const [formData, setFormData] = useState(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -22,50 +59,63 @@ function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (value) => {
-    setFormData(prev => ({ ...prev, serviceInterest: value }));
+  const handleSelectChange = (field) => (value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validation
-    if (!formData.name || !formData.email || !formData.projectDescription) {
-      toast.error('Please fill in all required fields');
+
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error('Please fill in your name, email and message');
       return;
     }
-    
+
     if (!formData.email.includes('@')) {
       toast.error('Please enter a valid email address');
+      return;
+    }
+
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.startsWith('PASTE_')) {
+      toast.error('The contact form is not configured yet. Please email milan@monolithms.com directly.');
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Save to localStorage
+      // Local backup in case delivery fails
       const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
-      submissions.push({
-        ...formData,
-        timestamp: new Date().toISOString()
-      });
+      submissions.push({ ...formData, timestamp: new Date().toISOString() });
       localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      toast.success('Message sent successfully. We will respond within 24 hours.');
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        projectDescription: '',
-        serviceInterest: ''
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New project enquiry from ${formData.name}`,
+          from_name: 'Monolith Microsystems Website',
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || 'Not provided',
+          project_type: labelFor(PROJECT_TYPES, formData.projectType),
+          budget_range: labelFor(BUDGET_RANGES, formData.budgetRange),
+          timeline: labelFor(TIMELINES, formData.timeline),
+          message: formData.message
+        })
       });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success('Message sent successfully. We will respond within 24 hours.');
+        setFormData(emptyForm);
+      } else {
+        toast.error('Failed to send message. Please email milan@monolithms.com directly.');
+      }
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      toast.error('Failed to send message. Please email milan@monolithms.com directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -73,18 +123,33 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <Label htmlFor="name" className="text-foreground">Name *</Label>
-        <Input
-          id="name"
-          name="name"
-          type="text"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="mt-1 bg-card text-foreground border-border"
-          placeholder="Your full name"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <Label htmlFor="name" className="text-foreground">Name *</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="mt-1 bg-card text-foreground border-border"
+            placeholder="Your full name"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="company" className="text-foreground">Company</Label>
+          <Input
+            id="company"
+            name="company"
+            type="text"
+            value={formData.company}
+            onChange={handleChange}
+            className="mt-1 bg-card text-foreground border-border"
+            placeholder="Your company name"
+          />
+        </div>
       </div>
 
       <div>
@@ -101,46 +166,61 @@ function ContactForm() {
         />
       </div>
 
-      <div>
-        <Label htmlFor="company" className="text-foreground">Company</Label>
-        <Input
-          id="company"
-          name="company"
-          type="text"
-          value={formData.company}
-          onChange={handleChange}
-          className="mt-1 bg-card text-foreground border-border"
-          placeholder="Your company name"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <Label htmlFor="projectType" className="text-foreground">Project Type</Label>
+          <Select value={formData.projectType} onValueChange={handleSelectChange('projectType')}>
+            <SelectTrigger className="mt-1 bg-card text-foreground border-border">
+              <SelectValue placeholder="Select a domain" />
+            </SelectTrigger>
+            <SelectContent>
+              {PROJECT_TYPES.map((option) => (
+                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label htmlFor="budgetRange" className="text-foreground">Budget Range</Label>
+          <Select value={formData.budgetRange} onValueChange={handleSelectChange('budgetRange')}>
+            <SelectTrigger className="mt-1 bg-card text-foreground border-border">
+              <SelectValue placeholder="Select a range" />
+            </SelectTrigger>
+            <SelectContent>
+              {BUDGET_RANGES.map((option) => (
+                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       <div>
-        <Label htmlFor="serviceInterest" className="text-foreground">Service Interest</Label>
-        <Select value={formData.serviceInterest} onValueChange={handleSelectChange}>
+        <Label htmlFor="timeline" className="text-foreground">Timeline</Label>
+        <Select value={formData.timeline} onValueChange={handleSelectChange('timeline')}>
           <SelectTrigger className="mt-1 bg-card text-foreground border-border">
-            <SelectValue placeholder="Select a service" />
+            <SelectValue placeholder="When do you want to start" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="embedded-systems">Embedded Systems Design</SelectItem>
-            <SelectItem value="pcb-design">PCB Design</SelectItem>
-            <SelectItem value="product-development">Product Development</SelectItem>
-            <SelectItem value="manufacturing">Manufacturing Services</SelectItem>
-            <SelectItem value="consultation">General Consultation</SelectItem>
+            {TIMELINES.map((option) => (
+              <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
 
       <div>
-        <Label htmlFor="projectDescription" className="text-foreground">Project Description *</Label>
+        <Label htmlFor="message" className="text-foreground">Message *</Label>
         <Textarea
-          id="projectDescription"
-          name="projectDescription"
-          value={formData.projectDescription}
+          id="message"
+          name="message"
+          value={formData.message}
           onChange={handleChange}
           required
           rows={5}
           className="mt-1 bg-card text-foreground border-border"
-          placeholder="Tell us about your project requirements..."
+          placeholder="Tell us about your project, where it is today and what you need."
         />
       </div>
 
