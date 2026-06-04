@@ -2,113 +2,135 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import IndustryCard from '@/components/IndustryCard.jsx';
+import { Button } from '@/components/ui/button';
 
 function IndustriesPage() {
   const industries = [
     {
-      title: 'Automotive',
-      description: 'Advanced vehicle electronics and safety-critical systems for modern transportation.',
+      title: 'Manufacturing',
+      description: 'Connected factory systems that bring visibility, control and predictive insight to the production line.',
       useCases: [
-        'Electronic control units (ECUs)',
-        'Advanced driver assistance systems (ADAS)',
-        'Infotainment and connectivity',
-        'Battery management systems',
-        'Vehicle-to-everything (V2X) communication'
+        'Industry 4.0 integration',
+        'Machine monitoring',
+        'Predictive maintenance'
       ],
-      metrics: '47.2% faster time-to-market for automotive clients',
-      image: 'https://images.unsplash.com/photo-1677230017860-a8cc67785f0a?w=800&q=80'
+      metrics: '1000+ industrial devices running in production',
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80'
     },
     {
-      title: 'IoT',
-      description: 'Connected devices and sensor networks that power the Internet of Things.',
+      title: 'Logistics',
+      description: 'Autonomous movement and tracking for warehouses, yards and distribution operations.',
       useCases: [
-        'Smart sensors and edge devices',
-        'Wireless connectivity (WiFi, BLE, LoRaWAN)',
-        'Cloud integration and data pipelines',
-        'Low-power design for battery operation',
-        'Secure firmware and OTA updates'
+        'Autonomous guided vehicles (AGV)',
+        'Fleet coordination',
+        'Asset tracking'
       ],
-      metrics: '2,847 IoT devices deployed across 12 countries',
-      image: 'https://images.unsplash.com/photo-1666401565408-9b6b0741f0d6?w=800&q=80'
+      metrics: '500+ autonomous guided vehicles deployed',
+      image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80'
     },
     {
-      title: 'Industrial Automation',
-      description: 'Control systems and robotics for efficient manufacturing processes.',
+      title: 'Healthcare',
+      description: 'Clinical grade monitoring and control built for operation theatres and medical infrastructure.',
       useCases: [
-        'Programmable logic controllers (PLCs)',
-        'Industrial robotics control',
-        'Process automation and monitoring',
-        'Machine vision systems',
-        'Predictive maintenance solutions'
+        'Operation theatre platforms',
+        'Environmental and gas monitoring',
+        'Medical infrastructure control'
       ],
-      metrics: '83% efficiency improvement in production lines'
+      metrics: 'Modular operation theatre platform',
+      image: 'https://images.unsplash.com/photo-1532186773960-85649e5cb70b?w=800&q=80'
     },
     {
-      title: 'Consumer Electronics',
-      description: 'Smart devices and wearables that enhance everyday life.',
+      title: 'Energy',
+      description: 'Measurement and monitoring systems for power networks and metering at the edge.',
       useCases: [
-        'Wearable health and fitness devices',
-        'Smart home controllers',
-        'Audio and multimedia devices',
-        'Portable electronics',
-        'User interface and display systems'
+        'Power monitoring',
+        'Smart metering',
+        'Remote telemetry'
       ],
-      metrics: '12.4k consumer devices shipped in 2025'
+      metrics: 'Edge monitoring for power and metering',
+      image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80'
+    },
+    {
+      title: 'Agriculture',
+      description: 'Remote monitoring and automation for assets spread across wide, low connectivity areas.',
+      useCases: [
+        'Remote monitoring',
+        'Field automation',
+        'Long range connectivity'
+      ],
+      metrics: 'Built for remote, low connectivity sites',
+      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80'
     },
     {
       title: 'Aerospace',
-      description: 'High-reliability systems for demanding aerospace applications.',
+      description: 'Satellite communication and telemetry engineered with space grade reliability discipline.',
       useCases: [
-        'Flight control systems',
-        'Navigation and guidance',
+        'Satellite communication',
         'Telemetry and data acquisition',
-        'Avionics and instrumentation',
-        'Radiation-hardened designs'
+        'Fault tolerant design'
       ],
-      metrics: '99.97% reliability rate in aerospace deployments'
+      metrics: 'ISRO related satellite communication experience',
+      image: 'https://images.unsplash.com/photo-1457364887197-9150188c107b?w=800&q=80'
+    }
+  ];
+
+  const expertise = [
+    {
+      title: 'Architecture first',
+      body: 'Every project starts with system architecture, designed for scale and reliability before a line of code is written.'
     },
     {
-      title: 'Medical Devices',
-      description: 'Precision electronics with regulatory compliance for healthcare.',
-      useCases: [
-        'Diagnostic equipment',
-        'Patient monitoring systems',
-        'Surgical instruments',
-        'Portable medical devices',
-        'FDA and IEC 60601 compliance'
-      ],
-      metrics: 'FDA 510(k) cleared devices with ISO 13485 certification',
-      image: 'https://images.unsplash.com/photo-1532186773960-85649e5cb70b?w=800&q=80'
+      title: 'Safety and reliability',
+      body: 'A track record in medical, aerospace and industrial domains where reliability is not negotiable and validation is rigorous.'
+    },
+    {
+      title: 'Remote and harsh environments',
+      body: 'Systems that survive outside the lab, from busy factory floors to satellite linked assets in remote locations.'
+    },
+    {
+      title: 'Production and support',
+      body: 'Design for manufacturing, validation and long term support so deployments keep running well after launch.'
     }
   ];
 
   return (
     <>
       <Helmet>
-        <title>Industries - Monolith Microsystems</title>
-        <meta name="description" content="Specialized embedded systems solutions for automotive, IoT, industrial automation, consumer electronics, aerospace, and medical devices." />
+        <title>Industries | Monolith Microsystems</title>
+        <meta name="description" content="Embedded systems for manufacturing, logistics, healthcare, energy, agriculture and aerospace, from machine monitoring to satellite telemetry." />
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Header />
 
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-20 bg-[#0A0C10] overflow-hidden">
+          <div className="absolute inset-0 z-0 opacity-10">
+            <img
+              src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80"
+              alt="Industrial automation"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="heading-font text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6" style={{ letterSpacing: '-0.02em' }}>
-                Industry-specific solutions
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-4">Industries</p>
+              <h1 className="heading-font text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ letterSpacing: '-0.02em' }}>
+                Where our engineering goes to work
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Deep expertise across diverse sectors, delivering tailored embedded systems that meet unique industry requirements.
+              <p className="text-xl text-[#C8D0DC] max-w-3xl mx-auto leading-relaxed">
+                Deep embedded expertise applied across six sectors with very different demands and one shared need for reliability.
               </p>
             </motion.div>
           </div>
@@ -125,8 +147,8 @@ function IndustriesPage() {
           </div>
         </section>
 
-        {/* Industry Expertise */}
-        <section className="py-20 bg-muted/30">
+        {/* Cross-industry Expertise */}
+        <section className="py-20 bg-[#0A0C10]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -135,75 +157,59 @@ function IndustriesPage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Cross-industry expertise
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-3">Cross-industry Expertise</p>
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-white mb-4">
+                The same discipline, every sector
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Our experience spans multiple sectors, enabling us to bring best practices and innovative approaches to every project.
+              <p className="text-lg text-[#C8D0DC] max-w-2xl mx-auto">
+                What we learn in one industry strengthens the work we do in the next
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-3">
-                  Regulatory compliance
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Experience with ISO 9001, ISO 13485, FDA 510(k), IEC 60601, ISO 26262, and other industry-specific standards ensures your product meets all requirements.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-3">
-                  Safety-critical systems
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Proven track record in automotive, aerospace, and medical applications where reliability and safety are paramount, with rigorous validation processes.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-3">
-                  Scalable architectures
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Designs that scale from prototype to high-volume production, with consideration for manufacturing efficiency and cost optimization at every stage.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-3">
-                  Technology partnerships
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Relationships with leading semiconductor manufacturers, tool vendors, and certification bodies streamline development and reduce time to market.
-                </p>
-              </motion.div>
+              {expertise.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: (index % 2) * 0.1 }}
+                  className="bg-[#1C2030] border border-white/10 rounded p-6"
+                >
+                  <h3 className="heading-font text-xl font-semibold text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#C8D0DC] leading-relaxed">
+                    {item.body}
+                  </p>
+                </motion.div>
+              ))}
             </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Working in one of these sectors?
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Tell us about your environment and constraints. We will bring the engineering.
+              </p>
+              <Link to="/contact">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 rounded transition-smooth hover:shadow-lg hover:shadow-primary/30">
+                  Start a conversation
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </section>
 

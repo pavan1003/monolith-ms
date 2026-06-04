@@ -36,8 +36,8 @@ function ProjectCard({ title, description, techStack, results }) {
       
       {results && (
         <div className="pt-4 border-t border-border">
-          <p className="text-sm font-medium text-success mb-1">Results:</p>
-          <p className="text-sm text-muted-foreground">{results}</p>
+          <p className="text-sm font-medium text-foreground mb-1">Results:</p>
+          <p className="text-sm text-foreground">{results}</p>
         </div>
       )}
     </motion.div>

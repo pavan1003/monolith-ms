@@ -44,7 +44,7 @@ function IndustryCard({ title, description, useCases, metrics, image }) {
         
         {metrics && (
           <div className="pt-4 border-t border-border">
-            <p className="text-sm text-success font-medium">{metrics}</p>
+            <p className="text-sm text-success font-medium text-white">{metrics}</p>
           </div>
         )}
       </div>
