@@ -25,14 +25,8 @@ function Footer() {
               <Link to="/about" className="text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
                 About
               </Link>
-              <Link to="/services" className="text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
-                Capabilities
-              </Link>
-              <Link to="/industries" className="text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
-                Industries
-              </Link>
-              <Link to="/projects" className="text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
-                Projects
+              <Link to="/solutions" className="text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
+                Solutions
               </Link>
               <Link to="/contact" className="text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
                 Contact

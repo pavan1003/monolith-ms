@@ -121,7 +121,7 @@ function HomePage() {
               alt="Embedded electronics and circuit hardware"
               className="w-full h-full object-cover opacity-20"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0C10] via-[#0A0C10]/80 to-[#0A0C10]/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0C10] via-[#0A0C10]/10 to-[#0A0C10]/10" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -164,11 +164,6 @@ function HomePage() {
                   <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 rounded transition-smooth hover:shadow-lg hover:shadow-primary/30">
                     Start your project
                     <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button variant="outline" className="border-white/20 text-white bg-transparent hover:bg-white/10 text-lg px-8 py-6 rounded transition-smooth">
-                    Book technical consultation
                   </Button>
                 </Link>
               </motion.div>
@@ -311,7 +306,7 @@ function HomePage() {
             </div>
 
             <div className="text-center mt-12">
-              <Link to="/projects">
+              <Link to="/solutions#projects">
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
                   View all projects
                   <ArrowRight className="ml-2 w-4 h-4" />
