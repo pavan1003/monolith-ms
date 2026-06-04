@@ -1,12 +1,10 @@
 
 import React from 'react';
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, Navigate, BrowserRouter as Router } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import IndustriesPage from './pages/IndustriesPage';
-import ProjectsPage from './pages/ProjectsPage';
+import SolutionsPage from './pages/SolutionsPage';
 import ContactPage from './pages/ContactPage';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -17,9 +15,11 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/industries" element={<IndustriesPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/solutions" element={<SolutionsPage />} />
+        {/* Consolidated: the old Capabilities, Industries and Projects pages now live on /solutions */}
+        <Route path="/services" element={<Navigate to="/solutions" replace />} />
+        <Route path="/industries" element={<Navigate to="/solutions" replace />} />
+        <Route path="/projects" element={<Navigate to="/solutions" replace />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
       <Toaster />

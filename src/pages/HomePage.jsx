@@ -3,172 +3,162 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, CircuitBoard, Package, Factory, Car, Wifi, Cog, Smartphone, Plane, Heart } from 'lucide-react';
+import { ArrowRight, Bot, Cog, Satellite, Brain, HeartPulse, BatteryCharging, Layers, Factory, Network, UserCheck } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
-import ServiceCard from '@/components/ServiceCard.jsx';
 import FeatureCard from '@/components/FeatureCard.jsx';
-import ProjectCard from '@/components/ProjectCard.jsx';
-import IndustryCard from '@/components/IndustryCard.jsx';
 import { Button } from '@/components/ui/button';
 
 function HomePage() {
-  const services = [
-    {
-      icon: Cpu,
-      title: 'Embedded Systems Design',
-      description: 'Custom firmware development, microcontroller programming, and real-time operating systems tailored to your specifications.'
-    },
-    {
-      icon: CircuitBoard,
-      title: 'PCB Design',
-      description: 'Schematic design, layout optimization, and rapid prototyping for high-performance circuit boards.'
-    },
-    {
-      icon: Package,
-      title: 'Product Development',
-      description: 'Full lifecycle support from concept to production, ensuring your vision becomes reality.'
-    },
-    {
-      icon: Factory,
-      title: 'Manufacturing Services',
-      description: 'Assembly, testing, and quality assurance with rigorous standards for reliable products.'
-    }
+  const stats = [
+    { value: '14+', label: 'Years Experience' },
+    { value: '25+', label: 'Projects Delivered' },
+    { value: '500+', label: 'AGVs Deployed' },
+    { value: '1000+', label: 'Industrial Devices Running' },
+    { value: 'ISRO', label: 'Verified Experience' }
   ];
 
-  const features = [
+  const solutions = [
     {
-      icon: CircuitBoard,
-      title: 'Quality & Precision',
-      description: 'Every component meets strict quality standards with thorough testing and validation.'
+      icon: Bot,
+      title: 'Autonomous Systems',
+      description: 'Mobile robots and guided vehicles with onboard perception, navigation and fleet coordination.',
+      tags: ['AGV', 'AMR', 'Computer Vision', 'LiDAR']
     },
     {
       icon: Cog,
-      title: 'Scalability & Flexibility',
-      description: 'Solutions that grow with your needs, from prototype to mass production.'
-    },
-    {
-      icon: Cpu,
-      title: 'Engineering Excellence',
-      description: 'Experienced team with deep expertise in embedded systems and hardware design.'
-    }
-  ];
-
-  const industries = [
-    {
-      title: 'Automotive',
-      description: 'Advanced vehicle electronics and safety-critical systems for modern transportation.',
-      useCases: ['Vehicle control modules', 'Safety systems', 'Infotainment'],
-      metrics: '47.2% faster time-to-market',
-      image: 'https://images.unsplash.com/photo-1677230017860-a8cc67785f0a?w=800&q=80'
-    },
-    {
-      title: 'IoT',
-      description: 'Connected devices and sensor networks that power the Internet of Things.',
-      useCases: ['Smart sensors', 'Edge computing', 'Wireless connectivity'],
-      metrics: '2,847 devices deployed',
-      image: 'https://images.unsplash.com/photo-1666401565408-9b6b0741f0d6?w=800&q=80'
-    },
-    {
       title: 'Industrial Automation',
-      description: 'Control systems and robotics for efficient manufacturing processes.',
-      useCases: ['PLC systems', 'Robotics control', 'Process automation'],
-      metrics: '83% efficiency improvement'
+      description: 'Control systems, lighting protocols and machine networks built for the factory floor.',
+      tags: ['PLC', 'Control Systems', 'DMX', 'DALI', 'CAN']
     },
     {
-      title: 'Consumer Electronics',
-      description: 'Smart devices and wearables that enhance everyday life.',
-      useCases: ['Wearable tech', 'Smart home', 'Audio devices'],
-      metrics: '12.4k units shipped'
+      icon: Satellite,
+      title: 'Satellite Communication',
+      description: 'Remote monitoring and connectivity for assets far beyond conventional networks.',
+      tags: ['Remote Monitoring', 'Satellite IoT', 'Gateways']
     },
     {
-      title: 'Aerospace',
-      description: 'High-reliability systems for demanding aerospace applications.',
-      useCases: ['Flight control', 'Navigation systems', 'Telemetry'],
-      metrics: '99.97% reliability rate'
+      icon: Brain,
+      title: 'Edge AI',
+      description: 'Vision and inference running on device, close to where the data is generated.',
+      tags: ['OpenCV', 'AI Processing', 'Voice Interfaces']
     },
     {
-      title: 'Medical Devices',
-      description: 'Precision electronics with regulatory compliance for healthcare.',
-      useCases: ['Diagnostic equipment', 'Patient monitoring', 'Surgical tools'],
-      metrics: 'FDA compliant',
-      image: 'https://images.unsplash.com/photo-1532186773960-85649e5cb70b?w=800&q=80'
+      icon: HeartPulse,
+      title: 'Medical Infrastructure',
+      description: 'Operation theatre and environmental monitoring engineered for clinical reliability.',
+      tags: ['Operation Theatre', 'Environmental Monitoring']
+    },
+    {
+      icon: BatteryCharging,
+      title: 'Electric Mobility',
+      description: 'Battery management and motor control for the next generation of electric vehicles.',
+      tags: ['Battery Management', 'Motor Controllers']
     }
   ];
 
-  const projects = [
+  const highlights = [
     {
-      title: 'Smart IoT Gateway',
-      description: 'Multi-protocol gateway enabling seamless communication between legacy industrial equipment and modern cloud platforms.',
-      techStack: ['Embedded Linux', 'MQTT', 'Modbus', 'AWS IoT'],
-      results: '67% reduction in downtime, real-time monitoring for 500+ devices'
+      title: 'AGV Platform',
+      metric: '500+ Units Deployed',
+      description: 'Autonomous guided vehicle platform shipped at scale across live industrial floors.'
     },
     {
-      title: 'Automotive Control Module',
-      description: 'Safety-critical ECU for advanced driver assistance systems with real-time processing capabilities.',
-      techStack: ['ARM Cortex-M7', 'AUTOSAR', 'CAN Bus', 'ISO 26262'],
-      results: 'Achieved ASIL-D certification, 3.2ms response time'
+      title: 'Industrial Control Room',
+      metric: '1000+ Devices Running',
+      description: 'Centralized monitoring and control for thousands of connected industrial devices.'
     },
     {
-      title: 'Industrial Sensor Network',
-      description: 'Wireless sensor network for predictive maintenance in manufacturing facilities.',
-      techStack: ['LoRaWAN', 'STM32', 'Edge ML', 'Time-series DB'],
-      results: '89% prediction accuracy, $1.2M annual savings'
+      title: 'Satellite IoT',
+      metric: 'ISRO Related Development',
+      description: 'Remote connectivity and telemetry built with satellite communication discipline.'
     },
     {
-      title: 'Medical Device PCB',
-      description: 'High-precision circuit board for portable diagnostic equipment with stringent regulatory requirements.',
-      techStack: ['Medical-grade PCB', 'Low-power design', 'EMI shielding', 'IEC 60601'],
-      results: 'FDA 510(k) cleared, 72-hour battery life'
+      title: 'Smart Medical Infrastructure',
+      metric: 'Modular OT Platform',
+      description: 'Operation theatre monitoring and control engineered as a modular, deployable platform.'
+    }
+  ];
+
+  const reasons = [
+    {
+      icon: Layers,
+      title: 'Architecture Thinking',
+      description: 'Every engagement begins with system architecture, not just code. We design for scale, reliability and long term maintenance.'
+    },
+    {
+      icon: Factory,
+      title: 'Production Mindset',
+      description: 'DFM awareness, validation and manufacturability are built into every design. Shipped products are the goal, not prototypes.'
+    },
+    {
+      icon: Network,
+      title: 'Cross-Domain Expertise',
+      description: 'Firmware, hardware, industrial networking, edge AI and cloud. One team across the full embedded stack.'
+    },
+    {
+      icon: UserCheck,
+      title: 'Direct Founder Involvement',
+      description: 'Milan Panchal is on every project. Not a sales team, but your technical partner with ISRO level engineering discipline.'
     }
   ];
 
   return (
     <>
       <Helmet>
-        <title>Monolith Microsystems - Precision Embedded Systems & Hardware Solutions</title>
-        <meta name="description" content="Expert embedded systems design, PCB development, and manufacturing services for automotive, IoT, industrial automation, and more." />
+        <title>Monolith Microsystems | Embedded Systems Engineering</title>
+        <meta name="description" content="Monolith Microsystems engineers complex embedded products from concept to production across industrial automation, autonomous systems, satellite IoT, edge AI, medical infrastructure and electric mobility." />
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Header />
 
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0A0C10]">
           <div className="absolute inset-0 z-0">
             <img
-              src="https://images.unsplash.com/photo-1532186773960-85649e5cb70b?w=1920&q=80"
-              alt="Advanced manufacturing facility with precision equipment"
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=80"
+              alt="Embedded electronics and circuit hardware"
               className="w-full h-full object-cover opacity-20"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0C10] via-[#0A0C10]/10 to-[#0A0C10]/10" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="max-w-3xl">
-              <motion.h1
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="heading-font text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6"
+                className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-6"
+              >
+                Embedded Systems Engineering
+              </motion.p>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="heading-font text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
                 style={{ letterSpacing: '-0.02em' }}
               >
-                Build your hardware with precision
+                Engineering complex embedded products from concept to production
               </motion.h1>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-8 max-w-2xl"
+                className="text-xl text-[#C8D0DC] leading-relaxed mb-8 max-w-2xl"
               >
-                Expert embedded systems design and manufacturing services that bring your hardware vision to life.
+                Leveraging 14+ years of experience in Industrial Automation, Autonomous Systems, Satellite Communication, Electric Mobility, Medical Infrastructure and IIoT.
               </motion.p>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-wrap gap-4"
               >
                 <Link to="/contact">
                   <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 rounded transition-smooth hover:shadow-lg hover:shadow-primary/30">
@@ -181,33 +171,48 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Services Overview */}
-        <section className="py-20 bg-muted/30">
+        {/* Trust Bar */}
+        <section className="bg-[#1C2030] border-y border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our services
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Comprehensive hardware solutions from design to production
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {services.map((service, index) => (
-                <ServiceCard key={index} {...service} />
+            <div className="grid grid-cols-2 md:grid-cols-5 divide-x divide-white/10">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="px-4 py-8 text-center"
+                >
+                  <div className="heading-font text-3xl md:text-4xl font-bold text-white">{stat.value}</div>
+                  <div className="mono-font text-[10px] uppercase tracking-[0.1em] text-[#8A96A8] mt-2">{stat.label}</div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us */}
+        {/* Company Overview */}
+        <section className="py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-4">Engineering Beyond Prototypes</p>
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Most embedded projects fail in the transition from prototype to production
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Monolith Microsystems bridges that gap by combining architecture, firmware, hardware integration, industrial networking, manufacturing awareness and project execution. We focus on delivering reliable systems designed for deployment, scalability and long term support.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Featured Solutions */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -217,49 +222,48 @@ function HomePage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-3">Solutions</p>
               <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Why choose us
+                End to end embedded engineering
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Built on a foundation of quality, flexibility, and expertise
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {features.map((feature, index) => (
-                <FeatureCard key={index} {...feature} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Industries Served */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Industries we serve
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Specialized solutions across diverse sectors
+                Six domains where we take hardware concepts all the way to deployed systems
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {industries.map((industry, index) => (
-                <IndustryCard key={index} {...industry} />
+              {solutions.map((solution, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
+                  className="bg-card border border-border rounded p-6 transition-smooth hover-glow group"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-smooth mb-4">
+                    <solution.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="heading-font text-xl font-semibold text-foreground mb-2">
+                    {solution.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    {solution.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {solution.tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className="mono-font text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Featured Projects */}
+        {/* Project Highlights */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -269,22 +273,40 @@ function HomePage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-3">Project Highlights</p>
               <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Featured projects
+                Systems that shipped and stayed running
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Real-world solutions delivering measurable results
+                Real deployments across robotics, industry, space and healthcare
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {projects.map((project, index) => (
-                <ProjectCard key={index} {...project} />
+              {highlights.map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: (index % 2) * 0.1 }}
+                  className="bg-card border border-border rounded p-8 transition-smooth hover:shadow-lg hover:shadow-primary/20"
+                >
+                  <span className="mono-font text-xs uppercase tracking-[0.1em] text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded">
+                    {project.metric}
+                  </span>
+                  <h3 className="heading-font text-2xl font-semibold text-foreground mt-4 mb-3">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
+                </motion.div>
               ))}
             </div>
 
             <div className="text-center mt-12">
-              <Link to="/projects">
+              <Link to="/solutions#projects">
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
                   View all projects
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -294,8 +316,35 @@ function HomePage() {
           </div>
         </section>
 
+        {/* Why Monolith */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-12"
+            >
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-3">Why Monolith</p>
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Built different
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                A senior technical partner, not a vendor
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {reasons.map((reason, index) => (
+                <FeatureCard key={index} {...reason} />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Banner */}
-        <section className="py-20 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10">
+        <section className="py-20 bg-[#0A0C10]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -303,15 +352,15 @@ function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready to transform your hardware vision?
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-white mb-4">
+                Let's build something that ships
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Partner with us to bring precision engineering to your next project
+              <p className="text-lg text-[#C8D0DC] mb-8 max-w-2xl mx-auto">
+                From concept through production, Monolith delivers.
               </p>
               <Link to="/contact">
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 rounded transition-smooth hover:shadow-lg hover:shadow-primary/30">
-                  Get started today
+                  Start your project
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>

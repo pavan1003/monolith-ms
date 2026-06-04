@@ -2,95 +2,104 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Target, Eye, Award, Users, Lightbulb, Shield, HeartHandshake as Handshake, TrendingUp } from 'lucide-react';
+import { Layers, Factory, Network, UserCheck, ArrowRight, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import FeatureCard from '@/components/FeatureCard.jsx';
+import { Button } from '@/components/ui/button';
 
 function AboutPage() {
-  const values = [
-    {
-      icon: Lightbulb,
-      title: 'Innovation',
-      description: 'Pushing boundaries with cutting-edge technology and creative problem-solving approaches.'
-    },
-    {
-      icon: Target,
-      title: 'Precision',
-      description: 'Meticulous attention to detail in every design, ensuring flawless execution.'
-    },
-    {
-      icon: Shield,
-      title: 'Reliability',
-      description: 'Building systems you can trust with rigorous testing and quality assurance.'
-    },
-    {
-      icon: Handshake,
-      title: 'Partnership',
-      description: 'Collaborative approach that treats your success as our own mission.'
-    }
+  // Founder-specific stats only, the portfolio numbers (projects, AGVs, devices) live on the Home trust bar
+  const stats = [
+    { value: '14+', label: 'Years Embedded' },
+    { value: '30+', label: 'Engineers Led' },
+    { value: 'ISRO', label: 'Experience' }
   ];
 
-  const timeline = [
-    { year: '2018', event: 'Founded with a vision to democratize embedded systems design' },
-    { year: '2019', event: 'Launched first automotive-grade control module' },
-    { year: '2021', event: 'Expanded to IoT and industrial automation sectors' },
-    { year: '2023', event: 'Achieved ISO 9001 and ISO 13485 certifications' },
-    { year: '2025', event: 'Opened advanced manufacturing facility in San Jose' },
-    { year: '2026', event: 'Serving 200+ clients across 6 industries' }
+  const journey = [
+    { stage: 'Network Engineer', note: 'A foundation in network infrastructure and low level data systems.' },
+    { stage: 'Embedded Engineer', note: 'Moved into firmware and bare metal silicon execution.' },
+    { stage: 'ISRO', note: 'Contributed to satellite communication and telemetry systems.' },
+    { stage: 'Tech Lead', note: 'Owned architecture and delivery across complex programs.' },
+    { stage: 'Project Manager', note: 'Led cross functional teams of 30+ engineers to production.' },
+    { stage: 'Founder', note: 'Started Monolith to take ambitious hardware from concept to production.' }
+  ];
+
+  const reasons = [
+    {
+      icon: Layers,
+      title: 'Architecture Thinking',
+      description: 'Every engagement begins with system architecture, not just code. We design for scale, reliability and long term maintenance.'
+    },
+    {
+      icon: Factory,
+      title: 'Production Mindset',
+      description: 'DFM awareness, validation and manufacturability are built into every design. Shipped products are the goal, not prototypes.'
+    },
+    {
+      icon: Network,
+      title: 'Cross-Domain Expertise',
+      description: 'Firmware, hardware, industrial networking, edge AI and cloud. One team across the full embedded stack.'
+    },
+    {
+      icon: UserCheck,
+      title: 'Direct Founder Involvement',
+      description: 'Milan Panchal is on every project. Not a sales team, but your technical partner with ISRO level engineering discipline.'
+    }
   ];
 
   return (
     <>
       <Helmet>
-        <title>About Us - Monolith Microsystems</title>
-        <meta name="description" content="Learn about Monolith Microsystems' mission, values, and expertise in embedded systems and hardware design." />
+        <title>About | Monolith Microsystems</title>
+        <meta name="description" content="Monolith Microsystems is the focused embedded practice of Milan Panchal, built on 14+ years from network engineering to ISRO satellite communication to leading 30+ engineers." />
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Header />
 
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-20 bg-[#0A0C10] overflow-hidden">
+          <div className="absolute inset-0 z-0 opacity-10">
+            <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=80"
+              alt="Embedded engineering"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="text-center max-w-4xl mx-auto"
             >
-              <h1 className="heading-font text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6" style={{ letterSpacing: '-0.02em' }}>
-                Building the future of hardware
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-4">About</p>
+              <h1 className="heading-font text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight" style={{ letterSpacing: '-0.02em' }}>
+                Engineering should solve real problems. Technology must survive outside the lab.
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                We are a team of passionate engineers dedicated to creating precision embedded systems that power the next generation of technology.
-              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Company Overview */}
+        {/* Founder Section */}
         <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
+                className="md:col-span-2"
               >
-                <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  Who we are
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Monolith Microsystems specializes in embedded systems design, PCB development, and full-scale manufacturing services. Since 2018, we have partnered with companies across automotive, IoT, industrial automation, consumer electronics, aerospace, and medical device sectors.
-                </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Our team brings together decades of combined experience in firmware development, hardware design, and manufacturing optimization. We handle projects from initial concept through production, ensuring every component meets the highest standards of quality and performance.
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  With state-of-the-art facilities and a commitment to continuous improvement, we deliver solutions that are not just functional, but exceptional.
-                </p>
+                <img
+                  src="/portfolio.jpeg"
+                  alt="Milan Panchal, founder of Monolith Microsystems"
+                  className="w-full rounded border border-border object-cover"
+                />
               </motion.div>
 
               <motion.div
@@ -98,68 +107,34 @@ function AboutPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="bg-card border border-border rounded p-8"
+                className="md:col-span-3"
               >
-                <div className="grid grid-cols-2 gap-8">
-                  <div>
-                    <div className="text-4xl font-bold text-primary mb-2">200+</div>
-                    <p className="text-sm text-muted-foreground">Active clients</p>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-primary mb-2">2,847</div>
-                    <p className="text-sm text-muted-foreground">Projects delivered</p>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-primary mb-2">47</div>
-                    <p className="text-sm text-muted-foreground">Team members</p>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-primary mb-2">6</div>
-                    <p className="text-sm text-muted-foreground">Industries served</p>
-                  </div>
+                <h2 className="heading-font text-3xl font-bold text-foreground mb-2">Milan Panchal</h2>
+                <p className="mono-font text-xs uppercase tracking-[0.1em] text-primary mb-6">
+                  Embedded Systems Architect · Project Leader · Technology Strategist
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  14+ years of embedded engineering, from network infrastructure to ISRO satellite communication to leading 30+ engineers on complex IIoT deployments.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                  Monolith Microsystems is the culmination of that journey, a focused practice that turns ambitious hardware concepts into shipped products. Founders talk to founders, and every project ships.
+                </p>
+
+                <div className="grid grid-cols-3 gap-6">
+                  {stats.map((stat, index) => (
+                    <div key={index}>
+                      <div className="heading-font text-3xl font-bold text-primary mb-1">{stat.value}</div>
+                      <p className="mono-font text-[10px] uppercase tracking-[0.1em] text-muted-foreground">{stat.label}</p>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Mission & Vision */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-card border border-border rounded p-8"
-              >
-                <Target className="w-12 h-12 text-primary mb-4" />
-                <h3 className="heading-font text-2xl font-bold text-foreground mb-4">Our mission</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  To deliver precision-engineered embedded systems and hardware solutions that enable our clients to bring innovative products to market faster, with confidence in quality and reliability.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-card border border-border rounded p-8"
-              >
-                <Eye className="w-12 h-12 text-primary mb-4" />
-                <h3 className="heading-font text-2xl font-bold text-foreground mb-4">Our vision</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  To be the trusted partner for companies worldwide seeking exceptional embedded systems expertise, recognized for technical excellence, innovation, and unwavering commitment to client success.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Company Values */}
-        <section className="py-20">
+        {/* Career Journey */}
+        <section className="py-20 bg-[#0A0C10]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -168,135 +143,37 @@ function AboutPage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our values
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-3">Career Journey</p>
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-white mb-4">
+                From network engineer to founder
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Principles that guide every decision and project
-              </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {values.map((value, index) => (
-                <FeatureCard key={index} {...value} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Team Expertise */}
-        <section className="py-20 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Team expertise
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Specialists across every aspect of hardware development
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <Users className="w-8 h-8 text-primary mb-3" />
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-2">
-                  Embedded Systems Engineers
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  Firmware developers with expertise in ARM, AVR, PIC, and RISC-V architectures, real-time operating systems, and low-level optimization.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <Award className="w-8 h-8 text-primary mb-3" />
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-2">
-                  Hardware Design Specialists
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  PCB designers skilled in high-speed digital design, RF circuits, power management, and signal integrity analysis using industry-standard tools.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-card border border-border rounded p-6"
-              >
-                <TrendingUp className="w-8 h-8 text-primary mb-3" />
-                <h3 className="heading-font text-xl font-semibold text-foreground mb-2">
-                  Manufacturing Engineers
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  Production experts focused on DFM optimization, automated testing, quality control, and scaling from prototype to volume manufacturing.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Timeline */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our journey
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Key milestones in our growth
-              </p>
-            </motion.div>
-
-            <div className="max-w-3xl mx-auto">
-              {timeline.map((item, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {journey.map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-6 mb-8 last:mb-0"
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className={`rounded p-6 border ${
+                    index === journey.length - 1
+                      ? 'bg-primary/10 border-primary/30'
+                      : 'bg-[#1C2030] border-white/10'
+                  }`}
                 >
-                  <div className="flex-shrink-0 w-20 text-right">
-                    <span className="text-2xl font-bold text-primary">{item.year}</span>
-                  </div>
-                  <div className="flex-1 pb-8 border-l-2 border-border pl-6 relative">
-                    <div className="absolute left-0 top-2 w-3 h-3 bg-primary rounded-full -translate-x-[7px]" />
-                    <p className="text-muted-foreground">{item.event}</p>
-                  </div>
+                  <div className="mono-font text-xs text-primary mb-2">{String(index + 1).padStart(2, '0')}</div>
+                  <h3 className="heading-font text-xl font-semibold text-white mb-2">{item.stage}</h3>
+                  <p className="text-sm text-[#C8D0DC] leading-relaxed">{item.note}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Certifications */}
-        <section className="py-20 bg-muted/30">
+        {/* Why Work With Monolith */}
+        <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -305,51 +182,48 @@ function AboutPage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
+              <p className="mono-font text-sm uppercase tracking-[0.14em] text-primary mb-3">How We Work</p>
               <h2 className="heading-font text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Certifications & credentials
+                A senior technical partner, not a vendor
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Recognized standards of excellence
-              </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-card border border-border rounded p-6 text-center"
-              >
-                <Award className="w-12 h-12 text-primary mx-auto mb-3" />
-                <h3 className="heading-font text-lg font-semibold text-foreground mb-2">ISO 9001:2015</h3>
-                <p className="text-sm text-muted-foreground">Quality management systems</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-card border border-border rounded p-6 text-center"
-              >
-                <Award className="w-12 h-12 text-primary mx-auto mb-3" />
-                <h3 className="heading-font text-lg font-semibold text-foreground mb-2">ISO 13485:2016</h3>
-                <p className="text-sm text-muted-foreground">Medical devices quality management</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-card border border-border rounded p-6 text-center"
-              >
-                <Award className="w-12 h-12 text-primary mx-auto mb-3" />
-                <h3 className="heading-font text-lg font-semibold text-foreground mb-2">IPC-A-610</h3>
-                <p className="text-sm text-muted-foreground">Electronics assembly standards</p>
-              </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {reasons.map((reason, index) => (
+                <FeatureCard key={index} {...reason} />
+              ))}
             </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 bg-[#0A0C10]">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="heading-font text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to work with a team that ships?
+              </h2>
+              <p className="text-lg text-[#C8D0DC] mb-8">
+                Direct access to Milan on every project. Reach out for a no obligation technical consultation.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link to="/contact">
+                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 rounded transition-smooth hover:shadow-lg hover:shadow-primary/30">
+                    Book consultation
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <a href="mailto:milan@monolithms.com" className="flex items-center gap-2 mono-font text-sm text-[#C8D0DC] hover:text-primary transition-smooth">
+                  <Mail className="w-4 h-4" />
+                  milan@monolithms.com
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
 

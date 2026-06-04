@@ -1,0 +1,92 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#141824;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A0C10;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="acc512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C49A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00E5B5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="g512" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="url(#bg512)"/>
+
+  <!-- Inner border -->
+  <rect x="14" y="14" width="484" height="484" rx="70"
+        fill="none" stroke="#2E3A4E" stroke-width="2" opacity="0.5"/>
+
+  <!-- Subtle inner ring -->
+  <rect x="28" y="28" width="456" height="456" rx="60"
+        fill="none" stroke="#00C49A" stroke-width="1" opacity="0.1"/>
+
+  <!-- ── Diamond ── -->
+  <!-- Outer glow polygon -->
+  <polygon points="256,52 460,256 256,460 52,256"
+           fill="none" stroke="#00C49A" stroke-width="2" opacity="0.2"/>
+
+  <!-- Main diamond -->
+  <polygon points="256,58 454,256 256,454 58,256"
+           fill="none" stroke="url(#acc512)" stroke-width="5"
+           stroke-linejoin="round" filter="url(#g512)"/>
+
+  <!-- Diamond interior tint -->
+  <polygon points="256,58 454,256 256,454 58,256"
+           fill="#00C49A" opacity="0.04"/>
+
+  <!-- ── Centre square ── -->
+  <rect x="206" y="206" width="100" height="100" rx="12"
+        fill="url(#acc512)" opacity="0.97"/>
+  <!-- Centre inner detail lines -->
+  <rect x="222" y="222" width="68" height="68" rx="8"
+        fill="none" stroke="#0A0C10" stroke-width="4" opacity="0.35"/>
+  <!-- Centre dot -->
+  <circle cx="256" cy="256" r="10" fill="#0A0C10" opacity="0.45"/>
+
+  <!-- ── Vertex nodes ── -->
+  <circle cx="256" cy="58"  r="14" fill="#00C49A" opacity="0.35"/>
+  <circle cx="256" cy="58"  r="8"  fill="#00C49A" opacity="0.7"/>
+  <circle cx="256" cy="58"  r="4"  fill="#00C49A"/>
+
+  <circle cx="454" cy="256" r="14" fill="#00C49A" opacity="0.35"/>
+  <circle cx="454" cy="256" r="8"  fill="#00C49A" opacity="0.7"/>
+  <circle cx="454" cy="256" r="4"  fill="#00C49A"/>
+
+  <circle cx="256" cy="454" r="14" fill="#00C49A" opacity="0.35"/>
+  <circle cx="256" cy="454" r="8"  fill="#00C49A" opacity="0.7"/>
+  <circle cx="256" cy="454" r="4"  fill="#00C49A"/>
+
+  <circle cx="58"  cy="256" r="14" fill="#00C49A" opacity="0.35"/>
+  <circle cx="58"  cy="256" r="8"  fill="#00C49A" opacity="0.7"/>
+  <circle cx="58"  cy="256" r="4"  fill="#00C49A"/>
+
+  <!-- ── Connection stubs ── -->
+  <line x1="256" y1="58"  x2="256" y2="18"  stroke="#00C49A" stroke-width="3" opacity="0.4"/>
+  <circle cx="256" cy="18" r="4" fill="#00C49A" opacity="0.3"/>
+
+  <line x1="454" y1="256" x2="494" y2="256" stroke="#00C49A" stroke-width="3" opacity="0.4"/>
+  <circle cx="494" cy="256" r="4" fill="#00C49A" opacity="0.3"/>
+
+  <line x1="256" y1="454" x2="256" y2="494" stroke="#00C49A" stroke-width="3" opacity="0.4"/>
+  <circle cx="256" cy="494" r="4" fill="#00C49A" opacity="0.3"/>
+
+  <line x1="58"  y1="256" x2="18"  y2="256" stroke="#00C49A" stroke-width="3" opacity="0.4"/>
+  <circle cx="18" cy="256" r="4" fill="#00C49A" opacity="0.3"/>
+
+  <!-- ── Mid-edge circuit dots ── -->
+  <circle cx="355" cy="157" r="6" fill="#00C49A" opacity="0.3"/>
+  <circle cx="355" cy="355" r="6" fill="#00C49A" opacity="0.3"/>
+  <circle cx="157" cy="157" r="6" fill="#00C49A" opacity="0.3"/>
+  <circle cx="157" cy="355" r="6" fill="#00C49A" opacity="0.3"/>
+
+  <!-- ── Corner PCB vias ── -->
+  <circle cx="86"  cy="86"  r="5" fill="#2E3A4E"/>
+  <circle cx="426" cy="86"  r="5" fill="#2E3A4E"/>
+  <circle cx="86"  cy="426" r="5" fill="#2E3A4E"/>
+  <circle cx="426" cy="426" r="5" fill="#2E3A4E"/>
+</svg>
