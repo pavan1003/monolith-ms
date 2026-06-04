@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://monolithms.com/sitemap.xml
